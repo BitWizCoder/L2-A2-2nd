@@ -1,12 +1,21 @@
-import express, { Request, Response } from "express";
+import app from "./app";
+import config from "./config";
+import initDB from "./config/db";
 
-const app = express();
-const port = 5000;
+const port = config.port;
 
-app.get("/", (req: Request, res: Response) => {
-  res.json("Assignment 2 - Backend (API)");
-});
+async function main() {
+  try {
+    // 1. Initialize DB
+    await initDB();
 
-app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`);
-});
+    // 2. Start Server only after DB connects
+    app.listen(port, () => {
+      console.log(`Server running on port ${port}`);
+    });
+  } catch (err) {
+    console.error("Failed to start server:", err);
+  }
+}
+
+main();
