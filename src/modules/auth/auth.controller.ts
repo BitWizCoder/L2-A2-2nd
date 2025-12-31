@@ -6,7 +6,7 @@ const createUserIntoDb = async (req: Request, res: Response) => {
     const result = await authServices.createUserIntoDb(req.body);
     return res.status(200).json({
       success: true,
-      message: "user created",
+      message: "User registered successfully",
       data: result.rows[0],
     });
   } catch (error: any) {
@@ -25,7 +25,7 @@ const loginuserIntoDB = async (req: Request, res: Response) => {
     );
     return res.status(200).json({
       success: true,
-      message: "user found",
+      message: "Login successful",
       data: result,
     });
   } catch (error: any) {
