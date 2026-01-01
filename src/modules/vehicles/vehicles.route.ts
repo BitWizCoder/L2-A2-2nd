@@ -5,6 +5,6 @@ const router = Router();
 
 router.post("/vehicles", vehicleController.createVehicleIntoDb);
 
-router.get("/vehicles");
+router.get("/vehicles", vehicleController.getVehiclesFromDb);
 
 export const vehicleRoute = router;

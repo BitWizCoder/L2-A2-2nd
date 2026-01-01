@@ -10,7 +10,7 @@ initDB();
 
 app.use("/api/v1/auth", authRoute);
 
-app.use("/api/v1/vehicles", vehicleRoute);
+app.use("/api/v1/", vehicleRoute);
 
 app.listen(port, () => {
   console.log(`Server running on port ${port}`);
