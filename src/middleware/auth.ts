@@ -27,8 +27,6 @@ const auth = (...roles: string[]) => {
 
     req.user = decoded;
 
-    console.log(decoded);
-
     if (roles.length && !roles.includes(decoded.role)) {
       throw new Error("You are not authorized!!");
     }
