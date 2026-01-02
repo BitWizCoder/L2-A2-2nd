@@ -13,7 +13,6 @@ const auth = (...roles: string[]) => {
     const secret = "a-string-secret-at-least-256-bits-long";
 
     const decoded = jwt.verify(token, secret) as JwtPayload;
-    console.log(decoded);
 
     const user = await pool.query(
       `
@@ -27,6 +26,8 @@ const auth = (...roles: string[]) => {
     }
 
     req.user = decoded;
+
+    console.log(decoded);
 
     if (roles.length && !roles.includes(decoded.role)) {
       throw new Error("You are not authorized!!");
