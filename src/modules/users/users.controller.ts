@@ -67,7 +67,31 @@ const updateUser = async (req: Request, res: Response) => {
   }
 };
 
+const deleteUser = async (req: Request, res: Response) => {
+  try {
+    const { userId } = req.params;
+
+    // Call service to handle the logic
+    const result = await userServices.deleteUserFromDb(userId as string);
+
+    return res.status(200).json({
+      success: true,
+      message: "User deleted successfully",
+      data: result.rows[0],
+    });
+  } catch (error: any) {
+    // If the error is about active bookings, send 400 (Bad Request)
+    const statusCode = error.message.includes("active bookings") ? 400 : 500;
+
+    return res.status(statusCode).json({
+      success: false,
+      message: error.message,
+    });
+  }
+};
+
 export const userController = {
   getAllUsersFromDb,
   updateUser,
+  deleteUser,
 };
